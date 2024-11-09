@@ -1,12 +1,14 @@
 {
   "name": "taskdonmar",
   "version": "0.1.0",
+  "main": "main.js",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "concurrently \"npm run dev:next\" \"npm run dev:electron\"",
+    "dev:next": "next dev",
+    "dev:electron": "wait-on tcp:3000 && electron .",
+    "build": "next build && electron-builder",
+    "start": "next start"
   },
   "dependencies": {
     "concurrently": "^9.1.0",
@@ -23,6 +25,7 @@
     "wait-on": "^8.0.1"
   },
   "devDependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
